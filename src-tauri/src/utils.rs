@@ -20,3 +20,7 @@ pub fn remove_duplicates(mut items: Vec<String>) -> Vec<String> {
     let set: HashSet<_> = items.drain(..).collect();
     set.into_iter().collect()
 }
+
+pub fn log_debug(msg: &str) {
+    println!("\x1b[38;5;208m[DEBUG]\x1b[0m {}", msg);
+}

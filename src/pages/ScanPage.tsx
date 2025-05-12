@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "../components/Header";
 import { invoke } from "@tauri-apps/api/core";
 import { useNavigate } from "react-router-dom";
 const ScanPage = () => {
@@ -39,7 +38,6 @@ const ScanPage = () => {
 
   return (
     <>
-      <Header />
       <section className="bg-white shadow rounded-lg p-4 sm:p-6 max-w-2xl mx-auto mt-4">
         <h3 className="text-lg sm:text-xl font-semibold mb-4 text-center sm:text-left">
           Nova Varredura
@@ -71,7 +69,9 @@ const ScanPage = () => {
         </div>
         {message && (
           <p
-            className={`mt-4 text-sm sm:text-base ${loading ? "text-blue-600" : "text-zinc-600"} text-center sm:text-left`}
+            className={`mt-4 text-sm sm:text-base ${
+              loading ? "text-blue-600" : "text-zinc-600"
+            } text-center sm:text-left`}
           >
             {message}
           </p>

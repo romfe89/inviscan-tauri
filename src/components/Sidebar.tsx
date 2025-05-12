@@ -30,14 +30,13 @@ const Sidebar = () => (
           Varreduras
         </NavLink>
         <NavLink
-          to="/resultados"
+          to="/sobre"
           className={({ isActive }) =>
             isActive ? "text-blue-400" : "hover:text-blue-400"
           }
         >
-          Resultados
+          Sobre
         </NavLink>
-        <a href="#">Sobre</a>
       </nav>
     </div>
     <footer className="text-xs text-gray-400 text-center mt-8">

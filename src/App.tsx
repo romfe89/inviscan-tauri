@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage";
 import TargetsPage from "./pages/TargetsPage";
 import ScanPage from "./pages/ScanPage";
-import ResultsPage from "./pages/ResultsPage";
+import AboutPage from "./pages/AboutPage";
 import ScanResultDetails from "./pages/ScanResultDetails";
 import "./App.css";
 import "./index.css";
@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/alvos" element={<TargetsPage />} />
           <Route path="/varreduras" element={<ScanPage />} />
-          <Route path="/resultados" element={<ResultsPage />} />
+          <Route path="/sobre" element={<AboutPage />} />
           <Route path="/resultados/:path" element={<ScanResultDetails />} />
         </Routes>
       </main>

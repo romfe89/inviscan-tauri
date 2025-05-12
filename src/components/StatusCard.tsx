@@ -7,7 +7,10 @@ const StatusCard = () => {
   useEffect(() => {
     invoke<string>("ping")
       .then((message) => setPing(message))
-      .catch(() => setPing("Offline"));
+      .catch((err) => {
+        console.error("Erro ao chamar backend:", err);
+        setPing("Offline");
+      });
   }, []);
 
   return (

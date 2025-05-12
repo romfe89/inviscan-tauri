@@ -1,31 +1,66 @@
-const TargetsTable = () => (
-  <section className="mt-10">
-    <h3 className="text-lg font-semibold mb-4">Últimos Alvos</h3>
-    <table className="w-full text-sm border border-zinc-300">
-      <thead className="bg-zinc-200">
-        <tr>
-          <th className="p-2 text-left">Subdomínio</th>
-          <th className="p-2 text-left">Status</th>
-          <th className="p-2 text-left">Serviço</th>
-          <th className="p-2 text-left">Sensível?</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="hover:bg-zinc-100">
-          <td className="p-2">admin.exemplo.com</td>
-          <td className="p-2 text-green-600">Ativo</td>
-          <td className="p-2">HTTP 200</td>
-          <td className="p-2 font-bold text-red-500">SIM</td>
-        </tr>
-        <tr className="hover:bg-zinc-100">
-          <td className="p-2">dev.exemplo.com</td>
-          <td className="p-2 text-gray-500">Inativo</td>
-          <td className="p-2">-</td>
-          <td className="p-2">Não</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-);
+import { useEffect, useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
 
-export default TargetsTable;
+export interface ScanResult {
+  name: string;
+  date: string;
+  endpoints: number;
+  juicy_targets: number;
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  const pad = (n: number) => n.toString().padStart(2, "0");
+  return `${pad(date.getDate())}/${pad(
+    date.getMonth() + 1
+  )}/${date.getFullYear()} ${pad(date.getHours())}:${pad(
+    date.getMinutes()
+  )}:${pad(date.getSeconds())}`;
+}
+
+export default function TargetsTable() {
+  const [scans, setScans] = useState<ScanResult[]>([]);
+
+  useEffect(() => {
+    invoke<ScanResult[]>("get_previous_scans")
+      .then((res) => {
+        console.log("Scans:", res);
+        setScans(res);
+      })
+      .catch(console.error);
+  }, []);
+
+  return (
+    <div className="p-4 w-full max-w-6xl mx-auto">
+      <div className="bg-white shadow rounded-lg overflow-auto max-h-[70vh]">
+        <table className="min-w-full text-sm text-left table-auto border-collapse">
+          <thead className="bg-zinc-100 text-zinc-700 sticky top-0 z-10">
+            <tr>
+              <th className="px-4 py-3 border-b whitespace-nowrap">URL Alvo</th>
+              <th className="px-4 py-3 border-b whitespace-nowrap">Data</th>
+              <th className="px-4 py-3 border-b whitespace-nowrap">
+                Resultados
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {scans.map((scan, i) => {
+              return (
+                <tr key={i} className="hover:bg-zinc-50">
+                  <td className="px-4 py-2 border-b align-top">{scan.name}</td>
+                  <td className="px-4 py-2 border-b align-top">
+                    {formatDate(scan.date)}
+                  </td>
+                  <td className="px-4 py-2 border-b align-top whitespace-nowrap">
+                    {scan.endpoints} endpoints / {scan.juicy_targets} juicy
+                    targets
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

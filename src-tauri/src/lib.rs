@@ -3,11 +3,13 @@ pub mod compare;
 pub mod ffuf;
 pub mod juicy;
 pub mod probing;
+pub mod commands;
 mod scan;
 pub mod screenshot;
 pub mod subdomains;
 pub mod utils;
 use scan::run_full_scan_command;
+use commands::get_previous_scans;
 
 #[tauri::command]
 fn greet(name: &str) -> String {
@@ -23,8 +25,12 @@ fn ping() -> String {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet])
-        .invoke_handler(tauri::generate_handler![ping, run_full_scan_command])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            ping,
+            run_full_scan_command,
+            get_previous_scans
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

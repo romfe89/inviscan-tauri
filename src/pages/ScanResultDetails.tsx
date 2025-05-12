@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Header from "../components/Header";
-
 interface ResultData {
   subdomains: string[];
   active: string[];
@@ -30,7 +28,6 @@ const ScanResultDetails = () => {
 
   return (
     <>
-      <Header />
       <section className="bg-white shadow rounded-lg p-6">
         <h2 className="text-xl font-bold mb-4">Detalhes da Varredura</h2>
         {error && <p className="text-red-600">{error}</p>}
