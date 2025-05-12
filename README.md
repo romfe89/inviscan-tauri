@@ -34,18 +34,18 @@ Todos os resultados de varreduras são salvos no diretório:
 
 Cada subpasta representa um scan, contendo arquivos como:
 
-    - active_sites.txt: lista de sites ativos detectados
+- active_sites.txt: lista de sites ativos detectados
 
-    - juicytargets.txt: possíveis alvos sensíveis encontrados
+- juicytargets.txt: possíveis alvos sensíveis encontrados
 
 ## 🛠 Tecnologias
 
-    - ⚙️ Rust (backend)
+- ⚙️ Rust (backend)
 
-    - ⚡ Bun (gerenciador de pacotes e runtime)
+- ⚡ Bun (gerenciador de pacotes e runtime)
 
-    - 🖥 React + TypeScript (frontend)
+- 🖥 React + TypeScript (frontend)
 
-    - 🎨 Tailwind CSS (estilização)
+- 🎨 Tailwind CSS (estilização)
 
-    - 🪟 Tauri (empacotamento)
+- 🪟 Tauri (empacotamento)
