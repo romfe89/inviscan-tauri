@@ -31,7 +31,7 @@ pub fn run_ffuf(domain: &str, output_dir: &Path) -> Result<Vec<String>, String> 
 
     let base_domain = domain.trim_start_matches("www.").to_string();
     log_info(&format!(
-        "Executando comando ffuf: ffuf -u http://FUZZ.{} -w {} -mc 200 -t 40 -of json -o {}",
+        "Executando comando ffuf: ffuf -u https://FUZZ.{} -w {} -mc 200 -t 40 -of json -o {}",
         base_domain,
         wordlist,
         output_file.display()
@@ -40,7 +40,7 @@ pub fn run_ffuf(domain: &str, output_dir: &Path) -> Result<Vec<String>, String> 
     let ffuf_cmd = Command::new("ffuf")
         .args(&[
             "-u",
-            &format!("http://FUZZ.{}", base_domain),
+            &format!("https://FUZZ.{}", base_domain),
             "-w",
             wordlist,
             "-mc",
